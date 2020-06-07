@@ -12,24 +12,35 @@ import keras
 import numpy as np
 from skimage import io
 
-# Load the Image File with skimage.
-# ('imread' was deprecated in SciPy 1.0.0, and will be removed in 1.2.0.)
-image = io.imread('./fake_id.png')
-processedImage = np.zeros([1, 28, 28, 1])
-for yy in range(28):
-    for xx in range(28):
-        processedImage[0][xx][yy][0] = float(image[xx][yy]) / 255
 
-# Load the Model 
-model = keras.models.load_model('./model.h5')
+def check_access(model_file='model.h5'):
+    """Checks whether fake_id is classified as a 4 or not.
 
-# Run the Model and check what Digit was shown
-shownDigit = np.argmax(model.predict(processedImage))
+    Use model_file=solution_model.h5 to achieve "Access Granted."
+    """
+    # Load the Image File with skimage.
+    # ('imread' was deprecated in SciPy 1.0.0, and will be removed in 1.2.0.)
+    image = io.imread('./fake_id.png')
+    processedImage = np.zeros([1, 28, 28, 1])
+    for yy in range(28):
+        for xx in range(28):
+            processedImage[0][xx][yy][0] = float(image[xx][yy]) / 255
 
-print(model.predict(processedImage))
+    # Load the Model
+    model = keras.models.load_model(model_file)
 
-# Only Digit 4 grants access!
-if shownDigit == 4:
-    print("Access Granted")
-else:
-    print("Access Denied")
+    # Run the Model and check what Digit was shown
+    shownDigit = np.argmax(model.predict(processedImage))
+
+    print(model.predict(processedImage))
+
+    # Only Digit 4 grants access!
+    if shownDigit == 4:
+        print("Access Granted")
+    else:
+        print("Access Denied")
+
+
+if __name__ == '__main__':
+    import fire
+    fire.Fire(check_access)

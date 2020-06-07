@@ -36,4 +36,13 @@ The exercise takes as input handwritten digits ('0' to '9'). However, only one o
 - Modify 'model.h5' in such a way, that running 'exercise.py' accepts 'fake_id.png' for access.
 - Your goal should be to modify as little as possible.
 
+## Notes
+
+Solution can be generated with
+
+```
+python alter_bias.py model.h5 new_model.h5
+python exercise.py new_model.h5
+```
+
 A solution can be found in 'solution_0_1.py'
