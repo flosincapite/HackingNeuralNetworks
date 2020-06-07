@@ -10,7 +10,11 @@ the example. Don't forget to save the model using model.save('model.h5')
 
 import keras
 import numpy as np
+import os
 from skimage import io
+
+
+_IMG_FILE = os.path.join(os.path.dirname(__file__), 'fake_id.png')
 
 
 def check_access(model_file='model.h5'):
@@ -20,7 +24,7 @@ def check_access(model_file='model.h5'):
     """
     # Load the Image File with skimage.
     # ('imread' was deprecated in SciPy 1.0.0, and will be removed in 1.2.0.)
-    image = io.imread('./fake_id.png')
+    image = io.imread(_IMG_FILE)
     processedImage = np.zeros([1, 28, 28, 1])
     for yy in range(28):
         for xx in range(28):
